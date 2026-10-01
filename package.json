@@ -1,0 +1,35 @@
+{
+  "name": "cloudflare-server-probe",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "packageManager": "pnpm@11.19.0",
+  "engines": {
+    "node": ">=22.12.0"
+  },
+  "scripts": {
+    "dev": "wrangler dev",
+    "deploy": "wrangler deploy",
+    "dry-run": "wrangler deploy --dry-run",
+    "types": "wrangler types",
+    "typecheck": "tsc --noEmit",
+    "test": "vitest run",
+    "deploy-button": "node scripts/set-deploy-button.mjs"
+  },
+  "cloudflare": {
+    "bindings": {
+      "ADMIN_PASSWORD": { "description": "设置 12–128 字符的管理员登录密码，部署前必须填写。" },
+      "ADMIN_USERNAME": { "description": "管理员用户名，默认 admin。" },
+      "CONTROL": { "description": "保存客户端、Bark 设置和登录会话。" },
+      "MONITORS": { "description": "保存每台服务器的心跳和告警状态。" }
+    }
+  },
+  "devDependencies": {
+    "@cloudflare/vitest-pool-workers": "^0.22.0",
+    "@cloudflare/workers-types": "latest",
+    "@types/node": "22.0.0",
+    "typescript": "^5.9.0",
+    "vitest": "^4.1.0",
+    "wrangler": "^4.0.0"
+  }
+}

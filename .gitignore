@@ -1,0 +1,17 @@
+node_modules/
+.pnpm-store/
+.wrangler/
+dist/
+.dev.vars
+.dev.vars.*
+!.dev.vars.example
+.env
+.env.*
+secrets.json
+server-config.json
+agent/config.json
+__pycache__/
+*.pyc
+.agents/
+.codex/
+AGENTS.md

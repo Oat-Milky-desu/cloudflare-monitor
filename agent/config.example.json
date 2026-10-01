@@ -1,0 +1,7 @@
+{
+  "workerUrl": "https://your-worker.your-subdomain.workers.dev",
+  "serverId": "home-server",
+  "token": "replace-with-a-random-token-of-at-least-24-chars",
+  "intervalSeconds": 30,
+  "requestTimeoutSeconds": 10
+}

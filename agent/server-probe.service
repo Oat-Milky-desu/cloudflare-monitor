@@ -1,0 +1,33 @@
+[Unit]
+Description=Cloudflare Workers server probe __SERVER_ID__
+Wants=network-online.target
+After=network-online.target
+
+[Service]
+Type=simple
+User=server-probe
+Group=server-probe
+ExecStart=__PYTHON_PATH__ /opt/server-probe/__SERVER_ID__/agent.py --config /etc/server-probe/__SERVER_ID__.json
+Restart=on-failure
+RestartSec=5s
+UMask=0077
+NoNewPrivileges=true
+PrivateTmp=true
+PrivateDevices=true
+ProtectSystem=strict
+ProtectHome=true
+ProtectKernelTunables=true
+ProtectKernelModules=true
+ProtectControlGroups=true
+ProtectProc=invisible
+ProcSubset=pid
+RestrictSUIDSGID=true
+RestrictRealtime=true
+LockPersonality=true
+MemoryDenyWriteExecute=true
+CapabilityBoundingSet=
+AmbientCapabilities=
+RestrictAddressFamilies=AF_UNIX AF_INET AF_INET6
+
+[Install]
+WantedBy=multi-user.target

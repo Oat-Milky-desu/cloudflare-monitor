@@ -1,0 +1,121 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#f4f7f5">
+  <title>登录 · 服务器监控</title>
+  <style>
+    :root{color-scheme:light;--ink:#172622;--muted:#71807b;--line:#e4ebe7;--green:#16745b;--green-dark:#105b47;--red:#b3453f;--shadow:0 18px 55px rgba(27,61,48,.08),0 2px 8px rgba(27,61,48,.035);font-family:Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Microsoft YaHei",sans-serif;font-synthesis:none;text-rendering:optimizeLegibility}
+    *{box-sizing:border-box}[hidden]{display:none!important}body{min-width:320px;min-height:100vh;margin:0;color:var(--ink);background:radial-gradient(ellipse at 80% -10%,rgba(208,232,219,.6),transparent 38rem),#f4f7f5}
+    button,input{font:inherit}.topbar{height:74px;border-bottom:1px solid rgba(220,230,224,.85);background:rgba(255,255,255,.78);backdrop-filter:blur(14px)}.topbar-inner{width:min(1080px,calc(100% - 48px));height:100%;display:flex;align-items:center;margin:0 auto}
+    .brand{display:flex;align-items:center;gap:12px}.brand-mark{width:36px;height:36px;display:grid;place-items:center;border-radius:12px;color:white;background:linear-gradient(145deg,#238b6d,#12634d);box-shadow:0 5px 12px rgba(22,116,91,.19)}.brand-mark svg{width:20px;height:20px}.brand-name{font-size:14px;font-weight:730;letter-spacing:-.02em}.brand-caption{margin-top:2px;color:var(--muted);font-size:10px;letter-spacing:.09em}
+    main{width:min(1080px,calc(100% - 48px));margin:0 auto;padding:68px 0 80px}.eyebrow{display:flex;align-items:center;gap:8px;color:var(--green);font-size:10px;font-weight:750;letter-spacing:.14em}.eyebrow-line{width:18px;height:1px;background:#70a890}h1{margin:12px 0 9px;font-size:clamp(28px,4vw,38px);line-height:1.2;letter-spacing:-.045em}.intro{max-width:520px;margin:0;color:var(--muted);font-size:13px;line-height:1.8}
+    .login-card{max-width:520px;margin-top:29px;padding:27px;border:1px solid rgba(221,231,225,.95);border-radius:17px;background:#fff;box-shadow:var(--shadow)}.card-heading{margin:0;font-size:15px;font-weight:720;letter-spacing:-.015em}.card-copy{margin:7px 0 20px;color:var(--muted);font-size:11px;line-height:1.65}.field{margin-bottom:15px}.field-label{display:block;margin-bottom:7px;font-size:10px;font-weight:690}.field input{width:100%;height:44px;padding:0 12px;border:1px solid #dce5df;border-radius:9px;outline:none;color:var(--ink);background:#fbfcfb;font-size:12px;transition:border-color .15s,box-shadow .15s,background .15s}.field input::placeholder{color:#a0aaa5}.field input:focus{border-color:#67a98d;background:white;box-shadow:0 0 0 3px rgba(40,137,101,.11)}.field input:focus-visible,button:focus-visible{outline:3px solid rgba(40,137,101,.22);outline-offset:2px}
+    .button{width:100%;min-height:43px;display:inline-flex;align-items:center;justify-content:center;gap:8px;border:1px solid transparent;border-radius:9px;color:white;background:var(--green);font-size:11px;font-weight:690;cursor:pointer;transition:background .15s,transform .15s}.button:hover:not(:disabled){background:var(--green-dark)}.button:active:not(:disabled){transform:translateY(1px)}.button:disabled{opacity:.52;cursor:not-allowed}.button svg{width:15px;height:15px}
+    .feedback{min-height:19px;margin:10px 0 0;color:var(--muted);font-size:10px;line-height:1.6}.feedback.error{color:var(--red)}.privacy-note{display:flex;align-items:flex-start;gap:8px;margin-top:18px;padding-top:15px;border-top:1px solid #edf1ee;color:#82908a;font-size:10px;line-height:1.65}.privacy-note svg{width:14px;height:14px;margin-top:1px;flex:none;color:#729c87}.boot-card{max-width:520px;margin:35px auto 0;padding:14px;border:1px solid var(--line);border-radius:10px;color:var(--muted);background:rgba(255,255,255,.68);font-size:10px;line-height:1.6}
+    @media(max-width:540px){.topbar{height:66px}.topbar-inner,main{width:calc(100% - 32px)}main{padding-top:42px}.login-card{padding:21px 18px}.intro{font-size:12px}}
+    @media(prefers-reduced-motion:reduce){*,*::before,*::after{transition-duration:.01ms!important}}
+  </style>
+</head>
+<body>
+  <header class="topbar"><div class="topbar-inner"><div class="brand" aria-label="服务器状态监控"><div class="brand-mark" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none"><path d="M5 7.25h14M5 12h14M5 16.75h14" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/><circle cx="8" cy="7.25" r="1" fill="currentColor"/><circle cx="15" cy="12" r="1" fill="currentColor"/><circle cx="10" cy="16.75" r="1" fill="currentColor"/></svg></div><div><div class="brand-name">服务器在线状态</div><div class="brand-caption">SERVER PULSE</div></div></div></div></header>
+  <main>
+    <div class="eyebrow"><span class="eyebrow-line" aria-hidden="true"></span>SERVER MONITOR</div>
+    <h1>欢迎回来。</h1>
+    <p class="intro">登录后管理监控客户端、查看心跳状态，并配置异常通知。</p>
+    <section id="login-card" class="login-card" aria-labelledby="login-title">
+      <h2 id="login-title" class="card-heading">管理员登录</h2>
+      <p class="card-copy">使用部署时设置的用户名和密码访问控制台。</p>
+      <form id="login-form">
+        <div class="field"><label class="field-label" for="username">用户名</label><input id="username" name="username" type="text" autocomplete="username" autocapitalize="off" spellcheck="false" placeholder="输入用户名" required></div>
+        <div class="field"><label class="field-label" for="password">密码</label><input id="password" name="password" type="password" autocomplete="current-password" placeholder="输入密码" required></div>
+        <button id="login-button" class="button" type="submit"><span id="login-label">登录控制台</span><svg viewBox="0 0 20 20" fill="none" aria-hidden="true"><path d="M4 10h11m-4-4 4 4-4 4" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+      </form>
+      <p id="login-feedback" class="feedback" role="status" aria-live="polite"></p>
+      <div class="privacy-note"><svg viewBox="0 0 20 20" fill="none" aria-hidden="true"><rect x="4.1" y="8.3" width="11.8" height="8.2" rx="1.8" stroke="currentColor" stroke-width="1.4"/><path d="M6.8 8.1V5.9a3.2 3.2 0 0 1 6.4 0v2.2" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/><circle cx="10" cy="12.3" r=".9" fill="currentColor"/></svg><span>登录状态由安全 Cookie 保持。此页面不会保存密码。</span></div>
+    </section>
+    <p id="session-check" class="boot-card" role="status" aria-live="polite">正在检查登录状态…</p>
+  </main>
+  <script>
+    (() => {
+      'use strict';
+      const timeoutMs = 15000;
+      const form = document.getElementById('login-form');
+      const userInput = document.getElementById('username');
+      const passwordInput = document.getElementById('password');
+      const button = document.getElementById('login-button');
+      const label = document.getElementById('login-label');
+      const feedback = document.getElementById('login-feedback');
+      const sessionCheck = document.getElementById('session-check');
+      let busy = false;
+      function setFeedback(message, error) {
+        feedback.textContent = message || '';
+        feedback.classList.toggle('error', Boolean(error));
+      }
+      async function fetchJson(url, options) {
+        const controller = new AbortController();
+        let timedOut = false;
+        const timer = window.setTimeout(() => { timedOut = true; controller.abort(); }, timeoutMs);
+        try {
+          const response = await fetch(url, Object.assign({}, options, { credentials: 'same-origin', cache: 'no-store', signal: controller.signal }));
+          let data = {};
+          try { const raw = await response.text(); if (raw.trim()) data = JSON.parse(raw); } catch (_) { data = {}; }
+          return { response, data };
+        } catch (error) {
+          if (timedOut) { const timeoutError = new Error('timeout'); timeoutError.code = 'timeout'; throw timeoutError; }
+          throw error;
+        } finally { window.clearTimeout(timer); }
+      }
+      async function checkSession() {
+        try {
+          const result = await fetchJson('/api/session', { method: 'GET' });
+          if (result.response.ok && result.data && typeof result.data.username === 'string' && typeof result.data.csrfToken === 'string' && result.data.csrfToken) {
+            window.location.replace('/');
+            return;
+          }
+          sessionCheck.hidden = true;
+        } catch (_) {
+          sessionCheck.textContent = '暂时无法检查登录状态。你可以继续尝试登录。';
+        }
+      }
+      form.addEventListener('submit', async event => {
+        event.preventDefault();
+        if (busy) return;
+        const username = userInput.value.trim();
+        const password = passwordInput.value;
+        if (!username || !password) { setFeedback('请输入用户名和密码。', true); return; }
+        busy = true;
+        button.disabled = true;
+        label.textContent = '正在登录…';
+        setFeedback('', false);
+        try {
+          const result = await fetchJson('/api/login', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
+            body: JSON.stringify({ username, password })
+          });
+          passwordInput.value = '';
+          if (result.response.ok && result.data && result.data.ok === true && typeof result.data.username === 'string' && typeof result.data.csrfToken === 'string' && result.data.csrfToken) {
+            window.location.replace('/');
+            return;
+          }
+          if (result.response.status === 429) setFeedback('尝试次数过多，请稍后再试。', true);
+          else if (result.response.status === 401) setFeedback('用户名或密码不正确。', true);
+          else setFeedback('登录失败，请稍后重试。', true);
+        } catch (error) {
+          passwordInput.value = '';
+          if (error && error.code === 'timeout') setFeedback('登录请求超过 15 秒，请重试。', true);
+          else if (error && error.name === 'AbortError') setFeedback('登录请求已取消。', true);
+          else setFeedback('无法连接服务，请检查网络后重试。', true);
+        } finally {
+          busy = false;
+          button.disabled = false;
+          label.textContent = '登录控制台';
+        }
+      });
+      checkSession();
+    })();
+  </script>
+</body>
+</html>

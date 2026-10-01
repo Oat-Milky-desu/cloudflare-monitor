@@ -1,0 +1,3 @@
+# Local development only. Replace this placeholder with a unique password.
+# Never use the sample value in a production deployment.
+ADMIN_PASSWORD=""
